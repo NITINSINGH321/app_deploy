@@ -51,8 +51,16 @@ deploy() {
 echo "********** DEPLOYMENT STARTED *********"
 
 # Clone the code
-if ! code_clone; then
-    cd django-notes-app || exit 1
+# Clone the code
+if code_clone; then
+    echo "The code directory already exists."
+    cd django-notes-app || {
+        echo "Failed to change directory to django-notes-app."
+        exit 1
+    }
+else
+    echo "Failed to clone the code."
+    exit 1
 fi
 
 # Install dependencies
